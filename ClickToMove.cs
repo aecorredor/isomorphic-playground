@@ -26,7 +26,12 @@ public partial class ClickToMove : CharacterBody3D
       var from = camera.ProjectRayOrigin(mousePos);
       var to = from + camera.ProjectRayNormal(mousePos) * RayLength;
       var space = GetWorld3D().DirectSpaceState;
-      var rayQuery = new PhysicsRayQueryParameters3D() { From = from, To = to };
+      var rayQuery = new PhysicsRayQueryParameters3D()
+      {
+        From = from,
+        To = to,
+        CollideWithAreas = true
+      };
       var result = space.IntersectRay(rayQuery);
       GD.Print(result);
     }
