@@ -17,7 +17,7 @@ public partial class ClickToMove : CharacterBody3D
     return;
   }
 
-  public override void _Ready()
+  public override void _Input(InputEvent @event)
   {
     if (Input.IsActionJustPressed("LeftMouse"))
     {

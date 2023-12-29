@@ -45,4 +45,5 @@ shape = SubResource("CapsuleShape3D_fcjhp")
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="CharacterBody3D"]
 
 [node name="Camera3D" type="Camera3D" parent="." groups=["Camera"]]
-transform = Transform3D(0.868762, 0.325474, -0.373255, -0.0311597, 0.788132, 0.614717, 0.494248, -0.522412, 0.694841, -6.34399, 12.7455, 9.77809)
+transform = Transform3D(0.906308, 0.298836, -0.298836, 0, 0.707107, 0.707107, 0.422618, -0.640856, 0.640856, -8, 19, 14)
+fov = 60.0
