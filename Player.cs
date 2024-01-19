@@ -29,7 +29,21 @@ public partial class Player : CharacterBody3D
 
     if (!GlobalTransform.Origin.IsEqualApprox(targetPos))
     {
-      GetNode<Node3D>("Model").LookAt(targetPos, Vector3.Up);
+      // Lerp look at
+      // Create a target rotation basis from the direction
+      var model = GetNode<Node3D>("Model");
+      var targetTransform = Transform.LookingAt(targetPos, Vector3.Up);
+      var targetRotation = new Quaternion(targetTransform.Basis);
+      // Slerp from current rotation to target rotation
+      var currentRotation = new Quaternion(model.Transform.Basis);
+      var newRotation = currentRotation.Slerp(
+        targetRotation,
+        speed * (float)delta
+      );
+      model.Transform = new Transform3D(
+        new Basis(newRotation),
+        model.Transform.Origin
+      );
     }
 
     Velocity = direction * speed;
