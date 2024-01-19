@@ -3,23 +3,40 @@ using System;
 
 public partial class Player : CharacterBody3D
 {
-  private const float Speed = 10.0f;
+  private const float Speed = 5.0f;
   private const int RayLength = 100;
   private NavigationAgent3D navigationAgent;
+  private Node3D model;
 
   public override void _Ready()
   {
     navigationAgent = GetNode<NavigationAgent3D>("NavigationAgent3D");
+    model = GetNode<Node3D>("Model");
   }
 
   public override void _PhysicsProcess(double delta)
   {
+    updateAnimationState();
     if (navigationAgent.IsNavigationFinished())
     {
       return;
     }
 
     MoveToPoint(delta, Speed);
+  }
+
+  private void updateAnimationState()
+  {
+    var animationTree = model.GetNode<AnimationTree>("AnimationTree");
+
+    animationTree.Set(
+      "parameters/conditions/idle",
+      navigationAgent.IsNavigationFinished()
+    );
+    animationTree.Set(
+      "parameters/conditions/run",
+      !navigationAgent.IsNavigationFinished()
+    );
   }
 
   private void MoveToPoint(double delta, float speed)
@@ -31,7 +48,6 @@ public partial class Player : CharacterBody3D
     {
       // Lerp look at
       // Create a target rotation basis from the direction
-      var model = GetNode<Node3D>("Model");
       var targetTransform = Transform.LookingAt(targetPos, Vector3.Up);
       var targetRotation = new Quaternion(targetTransform.Basis);
       // Slerp from current rotation to target rotation
