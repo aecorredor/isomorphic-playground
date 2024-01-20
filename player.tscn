@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cfl4uldmhfdp4"]
 
 [ext_resource type="Script" path="res://Player.cs" id="2_3ysch"]
-[ext_resource type="PackedScene" uid="uid://dhpnsasheolru" path="res://character.tscn" id="2_e606n"]
+[ext_resource type="PackedScene" uid="uid://6yo7q6qbgj7e" path="res://character.tscn" id="2_e606n"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rft8q"]
 
